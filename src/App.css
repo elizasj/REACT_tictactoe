@@ -2,10 +2,11 @@
   padding: 3em;
 }
 
-#root, .title {
+#root, .header {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .board {
@@ -34,4 +35,22 @@
 .square:hover {
   cursor: pointer;
   background-color: #1A85FF;
+}
+
+button {
+  background-color: #1A85FF;
+  border-radius: 4px;
+  border: 1px solid #ffffff;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: sans-serif;
+  font-size: 23px;
+  padding: 12px 36px;
+  text-decoration: none;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: #6C98F6;
 }

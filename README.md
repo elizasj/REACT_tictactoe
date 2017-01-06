@@ -2,7 +2,7 @@
 
 - v.1 simple stateful interface (✔️)
 - v.1.2 alert for winner (WIP)
-- v.1.3 reset initial state (WIP)
+- v.1.3 reset initial state (✔️)
 
 ***
 

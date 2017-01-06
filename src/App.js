@@ -5,6 +5,7 @@ class App extends Component {
 
     constructor(props) {
         super(props)
+        this.newGame = this.newGame.bind(this);
         this.state = {
             PLAYER_ONE_SYMBOL: "X",
             PLAYER_TWO_SYMBOL: "O",
@@ -15,6 +16,16 @@ class App extends Component {
                 "","",""
             ]
         }
+    }
+
+    newGame () {
+        this.setState({
+            board: [
+                "","","",
+                "","","",
+                "","",""
+            ]
+        });
     }
 
     handleClick(index) {
@@ -32,8 +43,9 @@ class App extends Component {
     render() {
         return (
             <div>
-                <div className="title">
+                <div className="header">
                     <h1>Tic Tac Toe</h1>
+                    <button onClick={this.newGame}>clear board</button>
                 </div>
                 <div className="board">
                     {this.state.board.map((cell, index) => {
