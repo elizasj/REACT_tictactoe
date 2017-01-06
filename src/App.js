@@ -18,6 +18,7 @@ class App extends Component {
         }
     }
 
+    // reset the game
     newGame () {
         this.setState({
             board: [
@@ -28,6 +29,7 @@ class App extends Component {
         });
     }
 
+    // place an X or an O
     handleClick(index) {
         if (this.state.board[index] === "") {
             this.state.board[index] = this.state.currentTurn
@@ -40,7 +42,29 @@ class App extends Component {
         }
     }
 
+    // check for a win
+    checkForWin(index) {
+      const lines = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+      ];
+      for (let i = 0; i < lines.length; i++) {
+        const [a, b, c] = lines[i];
+        if (index[a] && index[a] === index[b] && index[a] === index[c]) {
+          return index[a];
+        }
+      }
+      return null;
+    }
+
     render() {
+
         return (
             <div>
                 <div className="header">
