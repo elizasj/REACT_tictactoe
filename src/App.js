@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import './App.css';
 
+import NewGame from './NewGame';
+import DisplayWinner from './DisplayWinner';
+
 class App extends Component {
 
     constructor(props) {
@@ -14,23 +17,26 @@ class App extends Component {
                 "","","",
                 "","","",
                 "","",""
-            ]
+            ],
+            winner: null
         }
     }
 
     // reset the game
-    newGame () {
+    newGame() {
         this.setState({
+            currentTurn: "X",
             board: [
                 "","","",
                 "","","",
                 "","",""
-            ]
+            ],
+            winner: null
         });
     }
 
-    // place an X or an O
     handleClick(index) {
+        // place an X or an O
         if (this.state.board[index] === "") {
             this.state.board[index] = this.state.currentTurn
             this.setState({
@@ -38,39 +44,49 @@ class App extends Component {
                 currentTurn: this.state.currentTurn === this.state.PLAYER_ONE_SYMBOL
                     ? this.state.PLAYER_TWO_SYMBOL
                     : this.state.PLAYER_ONE_SYMBOL
-            })
+            });
         }
-    }
 
-    // check for a win
-    checkForWin(index) {
-      const lines = [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        [0, 4, 8],
-        [2, 4, 6],
-      ];
-      for (let i = 0; i < lines.length; i++) {
-        const [a, b, c] = lines[i];
-        if (index[a] && index[a] === index[b] && index[a] === index[c]) {
-          return index[a];
+        // possible win combos
+        const lines = [
+          [0, 1, 2],
+          [3, 4, 5],
+          [6, 7, 8],
+          [0, 3, 6],
+          [1, 4, 7],
+          [2, 5, 8],
+          [0, 4, 8],
+          [2, 4, 6],
+        ];
+
+        let cells = this.state.board
+
+        // check for win
+        for (let i = 0; i < lines.length; i++) {
+          const [a, b, c] = lines[i];
+          if (cells[a] && cells[a] === cells[b] && cells[a] === cells[c]) {
+            const winner = this.state.currentTurn
+            this.setState({
+                winner: winner,
+                board: [
+                    "❤","❤","❤",
+                    "❤","❤","❤",
+                    "❤","❤","❤"
+                ]
+            })
+          }
         }
-      }
-      return null;
     }
 
     render() {
-
         return (
             <div>
                 <div className="header">
                     <h1>Tic Tac Toe</h1>
-                    <button onClick={this.newGame}>clear board</button>
+                    <NewGame reset={this.newGame.bind(this)} />
+                    <DisplayWinner winner={this.state.winner} />
                 </div>
+
                 <div className="board">
                     {this.state.board.map((cell, index) => {
                         return <div onClick={() => this.handleClick(index)} className="square">{cell}</div>

@@ -2,6 +2,10 @@
   padding: 3em;
 }
 
+h2 {
+  margin-bottom: 0;
+}
+
 #root, .header {
   display: flex;
   justify-content: center;
@@ -32,6 +36,17 @@
   color: white;
 }
 
+.gameover {
+  -webkit-animation: pulsate 1s ease-out;
+  -webkit-animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes pulsate {
+    0% {-webkit-transform: scale(0.1, 0.1); opacity: 0.0;}
+    50% {opacity: 1.0;}
+    100% {-webkit-transform: scale(1.2, 1.2); opacity: 0.0;}
+}
+
 .square:hover {
   cursor: pointer;
   background-color: #1A85FF;
@@ -53,4 +68,12 @@ button {
 button:hover {
   cursor: pointer;
   background-color: #6C98F6;
+}
+
+.visible {
+  opacity: 100;
+}
+
+.hidden {
+  opacity: 0;
 }
